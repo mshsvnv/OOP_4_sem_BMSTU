@@ -1,2 +1,2 @@
 # OOP_4_sem_BMSTU
-Object-oriented programming with C++
+labs, rks, exam of Object-oriented programming with C++
