@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     QGraphicsScene *scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
+    
+    ui->graphicsView->setAlignment(Qt::AlignTop | Qt::AlignLeft);
+    scene->setSceneRect(0, 0, 1, 1);
 
     connect(ui->progInfo, &QAction::triggered, this, &MainWindow::showProgInfo);
     connect(ui->authorInfo, &QAction::triggered, this, &MainWindow::showAuthorInfo);
@@ -84,11 +87,9 @@ void MainWindow::moveCommand(void) {
     double dy = ui->dyBox->value();
     double dz = ui->dzBox->value();
 
-    curProc.action = ROTATE;
+    curProc.action = MOVE;
 
-    curProc.movement.dx = dx;
-    curProc.movement.dy = dy;
-    curProc.movement.dz = dz;
+    curProc.movement = {dx, dy, dz};
 
     rc = performProc(curProc);
 
@@ -101,6 +102,34 @@ void MainWindow::moveCommand(void) {
 }
 
 void MainWindow::scaleCommand(void) {
+
+    bugT rc = OK;
+    procT curProc;
+
+    double x = ui->xBox->value();
+    double y = ui->yBox->value();
+    double z = ui->zBox->value();
+
+    double kx = ui->kxBox->value();
+    double ky = ui->kyBox->value();
+    double kz = ui->kzBox->value();
+
+    curProc.action = SCALE;
+
+    curProc.scale.kx = kx;
+    curProc.scale.ky = ky;
+    curProc.scale.kz = kz;
+    curProc.scale.keyPoint = {x, y, z};
+
+    checkScale(curProc.scale);
+
+    rc = performProc(curProc);
+
+    if (rc != OK)
+        showBugMessage(rc);
+    else
+        rc = drawModelCommand();
+
     return;
 }
 

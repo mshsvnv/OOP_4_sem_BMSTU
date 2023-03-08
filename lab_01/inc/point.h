@@ -1,6 +1,7 @@
 #ifndef __POINT__
 #define __POINT__
 
+#include <iostream>
 #include "bug.h"
 #include "utils.h"
 
@@ -20,5 +21,7 @@ void copyPoint(const pointT &src, pointT &dst);
 pointT getPointByIndex(const pointT *list, const int index);
 
 void movePoint(pointT &curPoint, const movementT &curMovement);
+
+void scalePoint(pointT &curPoint, const scaleT &curScale);
 
 #endif //__POINT__

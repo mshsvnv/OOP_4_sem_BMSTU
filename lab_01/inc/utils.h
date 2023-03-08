@@ -1,6 +1,8 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
+#define ZERO_SCALE 1E-8
+
 struct point {
     double x;
     double y;
@@ -34,5 +36,7 @@ struct scale {
 using movementT = struct move;
 using rotationT = struct rotate;
 using scaleT = struct scale;
+
+void checkScale(scaleT &curScale);
 
 #endif // __UTILS_H__

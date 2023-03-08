@@ -1,9 +1,9 @@
-#ifndef __ACT_H__
-#define __ACT_H__
+#ifndef __PROC_H__
+#define __PROC_H__
 
 #include "bug.h"
 #include "scene.h"
-// #include "utils.h"
+#include "utils.h"
 
 #define FILE_NAME_LEN 200
 
@@ -35,4 +35,4 @@ using procT = struct proc;
 
 bugT performProc(procT &curProc);
 
-#endif // __ACT_H__
+#endif // __PROC_H__

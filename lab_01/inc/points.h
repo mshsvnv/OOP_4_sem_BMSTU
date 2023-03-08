@@ -1,7 +1,6 @@
 #ifndef __POINTS_H__
 #define __POINTS_H__
 
-#include "draw.h"
 #include "utils.h"
 #include "bug.h"
 
@@ -25,5 +24,7 @@ bugT allocatePoints(pointsT &curPoints);
 bugT readAllPoints(pointsT &curPoints, FILE *file);
 
 void movePoints(pointsT &curPoints, const movementT &curMovement);
+
+void scalePoints(pointsT &curPoints, const scaleT &curScale);
 
 #endif // __POINTS_H__

@@ -1,5 +1,4 @@
-#include <iostream>
-
+#include "point.h"
 #include "scene.h"
 
 bugT readPoint(pointT &curPoint, FILE *file) {
@@ -41,4 +40,11 @@ void movePoint(pointT &curPoint, const movementT &curMovement) {
     curPoint.x += curMovement.dx;
     curPoint.y += curMovement.dy;
     curPoint.z += curMovement.dz;
+}
+
+void scalePoint(pointT &curPoint, const scaleT &curScale) {
+
+    curPoint.x = curScale.keyPoint.x + (curPoint.x - curScale.keyPoint.x) * curScale.kx;
+    curPoint.y = curScale.keyPoint.y + (curPoint.y - curScale.keyPoint.y) * curScale.ky;
+    curPoint.z = curScale.keyPoint.z + (curPoint.z - curScale.keyPoint.z) * curScale.kz;
 }

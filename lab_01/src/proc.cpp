@@ -24,8 +24,9 @@ bugT performProc(procT &curProc) {
         case MOVE:
             rc = moveModel(curModel, curProc.movement);
             break;
-        // case SCALE:
-        //     break;
+        case SCALE:
+            rc = scaleModel(curModel, curProc.scale);
+            break;
         // case EXIT:
         //     break;
         default:

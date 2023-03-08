@@ -29,4 +29,6 @@ void drawModel(const modelT &curModel, sceneT &curScene);
 
 bugT moveModel(modelT &curModel, const movementT &curMovemnet);
 
+bugT scaleModel(modelT &curModel, const scaleT &curScale);
+
 #endif // __MODEL_H__

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "points.h"
+#include "point.h"
 
 void initPoints(pointsT &curPoints) {
     
@@ -80,5 +81,12 @@ void movePoints(pointsT &curPoints, const movementT &curMovement) {
 
     for (int i = 0; i < curPoints.amount; i++) {
         movePoint(curPoints.list[i], curMovement);
+    }
+}
+
+void scalePoints(pointsT &curPoints, const scaleT &curScale) {
+
+    for (int i = 0; i < curPoints.amount; i++) {
+        scalePoint(curPoints.list[i], curScale);
     }
 }

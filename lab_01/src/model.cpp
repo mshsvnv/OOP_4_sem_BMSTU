@@ -82,4 +82,19 @@ bugT moveModel(modelT &curModel, const movementT &curMovement) {
     else {
         movePoints(curModel.points, curMovement);
     }
+
+    return rc;
+}
+
+bugT scaleModel(modelT &curModel, const scaleT &curScale) {
+    
+    bugT rc = OK;
+
+    if (curModel.edges.amount == 0)
+        rc = NO_MODEL;
+    else {
+        scalePoints(curModel.points, curScale);
+    }
+
+    return rc;
 }
