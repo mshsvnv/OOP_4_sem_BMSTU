@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "proc.h"
+
 namespace Ui {
     class MainWindow;
 }
@@ -23,7 +25,15 @@ class MainWindow : public QMainWindow {
 
         void saveCommand();
 
-        void openCommand();
+        void loadCommand();
+
+        void moveCommand();
+
+        void rotateCommand();
+        
+        void scaleCommand();
+
+        bugT drawModelCommand();
 
     private:
         Ui::MainWindow *ui;

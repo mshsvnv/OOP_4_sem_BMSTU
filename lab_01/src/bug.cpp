@@ -1,5 +1,31 @@
+#include <QMessageBox>
+
 #include "bug.h"
 
-void showBugMessage(bugT &bug) {
+void showBugMessage(bugT &curBug) {
+
+    switch(curBug) {
+        case NO_MODEL:
+            QMessageBox::warning(nullptr, "Предупреждение!", "Модель не была загружена!");
+            break;
+        case MEMORY_ERR:
+            QMessageBox::warning(nullptr, "Предупреждение!", "Ошибка при выделении памяти!");
+            break;
+        case POINTS_AMOUNT:
+            QMessageBox::warning(nullptr, "Предупреждение!", "Некорректное кол-во точек!");
+            break;
+        case EDGES_AMOUNT:
+            QMessageBox::warning(nullptr, "Предупреждение!", "Некорректное кол-во ребер!");
+            break;
+        case POINT_ERR:
+            QMessageBox::warning(nullptr, "Предупреждение!", "Некорректные данные для точки!");
+            break;
+        case EDGE_ERR:
+            QMessageBox::warning(nullptr, "Предупреждение!", "Некорректные данные для грани!");
+            break;
+        default:
+            break;
+    }
+
     return;
 }

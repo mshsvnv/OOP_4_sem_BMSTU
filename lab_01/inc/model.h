@@ -1,24 +1,32 @@
 #ifndef __MODEL_H__
 #define __MODEL_H__
 
-#include "point.h"
-#include "node.h"
+#include <iostream>
+using namespace std;
+
+#include "points.h"
+#include "edges.h"
+#include "bug.h"
 
 struct model {
-    int numVertices;
-    nodeT **vertices;
+    pointsT points;
+    edgesT edges;  
 };
 
 using modelT = struct model;
 
-// loadModel
-// saveModel
+modelT &initModel(void);
 
-// allocateModel
-// deleteModel
+bugT loadModel(modelT &model, const char *fileName);
 
-// moveModel
-// rotateModel
-// scaleModel
+bugT readModel(modelT &model, FILE *file);
+
+void deleteModel(modelT &model);
+
+void copyModel(modelT &permModel, const modelT &tempModel);
+
+void drawModel(const modelT &curModel, sceneT &curScene);
+
+bugT moveModel(modelT &curModel, const movementT &curMovemnet);
 
 #endif // __MODEL_H__

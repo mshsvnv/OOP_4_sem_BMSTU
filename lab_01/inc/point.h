@@ -1,22 +1,24 @@
 #ifndef __POINT__
 #define __POINT__
 
-struct point {
+#include "bug.h"
+#include "utils.h"
+
+struct point2D {
     double x;
     double y;
-    double z;
 };
 
-using pointT = struct point;
+using point2DT = struct point2D;
 
-// loadPoint
-// savePoint
+bugT readPoint(pointT &curPoint, FILE *file);
 
-// allocatePoint
-// deletePoint
+void convertPoint(const pointT &point3D, point2DT &point2D);
 
-// movePoint
-// rotatePoint
-// scalePoint
+void copyPoint(const pointT &src, pointT &dst);
+
+pointT getPointByIndex(const pointT *list, const int index);
+
+void movePoint(pointT &curPoint, const movementT &curMovement);
 
 #endif //__POINT__

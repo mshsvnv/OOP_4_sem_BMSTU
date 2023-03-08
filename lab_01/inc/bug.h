@@ -3,13 +3,14 @@
 
 enum bug {
     OK,
+    NO_MODEL,
+    MEMORY_ERR,
+    UNKNOWN_COMMAND,
     NO_INPUT_FILE,
-    EMPTY_INPUT_FILE,
-    VERTICES_AMOUNT,
-    VERTEX_NUM,
-    COORDS_VALUE,
-    ANGLE_VALUE,
-    // TODO
+    POINTS_AMOUNT,
+    EDGES_AMOUNT,
+    POINT_ERR,
+    EDGE_ERR
 };
 
 using bugT = enum bug;
