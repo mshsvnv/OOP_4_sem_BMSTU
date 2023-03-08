@@ -18,9 +18,9 @@ bugT performProc(procT &curProc) {
         case DRAW:
             drawModel(curModel, curProc.scene);
             break;
-        // case ROTATE:
-        //     rc = rotateModel(curModel, curProc.)
-        //     break;
+        case ROTATE:
+            rc = rotateModel(curModel, curProc.rotation);
+            break;
         case MOVE:
             rc = moveModel(curModel, curProc.movement);
             break;

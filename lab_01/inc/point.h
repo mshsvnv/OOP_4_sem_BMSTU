@@ -24,4 +24,12 @@ void movePoint(pointT &curPoint, const movementT &curMovement);
 
 void scalePoint(pointT &curPoint, const scaleT &curScale);
 
+void rotatePoint(pointT &curPoint, const rotationT &curRotation);
+
+void rotatePointX(pointT &curPoint, const pointT &keyPoint, const double &alpha);
+
+void rotatePointY(pointT &curPoint, const pointT &keyPoint, const double &angle);
+
+void rotatePointZ(pointT &curPoint, const pointT &keyPoint, const double &angle);
+
 #endif //__POINT__

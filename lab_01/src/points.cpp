@@ -90,3 +90,10 @@ void scalePoints(pointsT &curPoints, const scaleT &curScale) {
         scalePoint(curPoints.list[i], curScale);
     }
 }
+
+void rotatePoints(pointsT &curPoints, const rotationT &curRotation) {
+
+    for (int i = 0; i < curPoints.amount; i++) {
+        rotatePoint(curPoints.list[i], curRotation);
+    }
+}

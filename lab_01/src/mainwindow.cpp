@@ -12,6 +12,11 @@
 #include "bug.h"
 #include "model.h"
 
+// ${workspaceFolder}/**
+// /usr/include/x86_64-linux-gnu/qt5/
+// /usr/include/x86_64-linux-gnu/qt5/QtWidgets
+// /usr/include/x86_64-linux-gnu/qt5/QtCore
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
 
     ui->setupUi(this);
@@ -134,6 +139,32 @@ void MainWindow::scaleCommand(void) {
 }
 
 void MainWindow::rotateCommand(void) {
+
+    bugT rc = OK;
+    procT curProc;
+
+    double x = ui->xBox->value();
+    double y = ui->yBox->value();
+    double z = ui->zBox->value();
+
+    double oX = ui->xAngleBox->value();
+    double oY = ui->yAngleBox->value();
+    double oZ = ui->zAngleBox->value();
+
+    curProc.action = ROTATE;
+
+    curProc.rotation.oX = oX;
+    curProc.rotation.oY = oY;
+    curProc.rotation.oZ = oZ;
+    curProc.rotation.keyPoint = {x, y, z};
+
+    rc = performProc(curProc);
+
+    if (rc != OK)
+        showBugMessage(rc);
+    else
+        rc = drawModelCommand();
+
     return;
 }
 

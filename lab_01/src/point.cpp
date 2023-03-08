@@ -1,5 +1,7 @@
 #include "point.h"
 #include "scene.h"
+#include "math.h"
+#include "utils.h"
 
 bugT readPoint(pointT &curPoint, FILE *file) {
     
@@ -47,4 +49,53 @@ void scalePoint(pointT &curPoint, const scaleT &curScale) {
     curPoint.x = curScale.keyPoint.x + (curPoint.x - curScale.keyPoint.x) * curScale.kx;
     curPoint.y = curScale.keyPoint.y + (curPoint.y - curScale.keyPoint.y) * curScale.ky;
     curPoint.z = curScale.keyPoint.z + (curPoint.z - curScale.keyPoint.z) * curScale.kz;
+}
+
+void rotatePoint(pointT &curPoint, const rotationT &curRotation) {
+
+    rotatePointX(curPoint, curRotation.keyPoint, curRotation.oX);
+    rotatePointY(curPoint, curRotation.keyPoint, curRotation.oY);
+    rotatePointZ(curPoint, curRotation.keyPoint, curRotation.oZ);
+}
+
+void rotatePointX(pointT &curPoint, const pointT &keyPoint, const double &angle) {
+
+    pointT oldPoint;
+    double alpha = getRadians(angle);
+
+    copyPoint(curPoint, oldPoint);
+
+    double sinT = sin(alpha);
+    double cosT = cos(alpha);
+
+    curPoint.y = keyPoint.y + (oldPoint.y - keyPoint.y) * cosT + (keyPoint.z - oldPoint.z) * sinT;
+    curPoint.z = keyPoint.z + (oldPoint.y - keyPoint.y) * sinT + (oldPoint.z - keyPoint.z) * cosT;
+}
+
+void rotatePointY(pointT &curPoint, const pointT &keyPoint, const double &angle) {
+
+    pointT oldPoint;
+    double alpha = getRadians(angle);
+
+    copyPoint(curPoint, oldPoint);
+
+    double sinT = sin(alpha);
+    double cosT = cos(alpha);
+
+    curPoint.x = keyPoint.x + (oldPoint.x - keyPoint.x) * cosT + (oldPoint.z - keyPoint.z) * sinT;
+    curPoint.z = keyPoint.z + (keyPoint.x - oldPoint.x) * sinT + (oldPoint.z - keyPoint.z) * cosT;
+}
+
+void rotatePointZ(pointT &curPoint, const pointT &keyPoint, const double &angle) {
+
+    pointT oldPoint;
+    double alpha = getRadians(angle);
+
+    copyPoint(curPoint, oldPoint);
+
+    double sinT = sin(alpha);
+    double cosT = cos(alpha);
+
+    curPoint.x = keyPoint.x + (oldPoint.x - keyPoint.x) * cosT + (keyPoint.y - oldPoint.y) * sinT;
+    curPoint.y = keyPoint.y + (oldPoint.x - keyPoint.x) * sinT + (oldPoint.y - keyPoint.y) * cosT;
 }

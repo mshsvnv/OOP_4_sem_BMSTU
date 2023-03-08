@@ -27,4 +27,6 @@ void movePoints(pointsT &curPoints, const movementT &curMovement);
 
 void scalePoints(pointsT &curPoints, const scaleT &curScale);
 
+void rotatePoints(pointsT &curPoints, const rotationT &curScale);
+
 #endif // __POINTS_H__

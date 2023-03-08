@@ -31,4 +31,6 @@ bugT moveModel(modelT &curModel, const movementT &curMovemnet);
 
 bugT scaleModel(modelT &curModel, const scaleT &curScale);
 
+bugT rotateModel(modelT &curModel, const rotationT &curRotation);
+
 #endif // __MODEL_H__

@@ -12,3 +12,7 @@ void checkScale(scaleT &curScale) {
     if (abs(curScale.kz - 0) < ZERO_SCALE) 
         curScale.kz = ZERO_SCALE;
 }
+
+double getRadians(const double &angle) {
+    return (angle * M_PI) / 180;
+}

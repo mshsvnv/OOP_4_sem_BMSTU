@@ -98,3 +98,16 @@ bugT scaleModel(modelT &curModel, const scaleT &curScale) {
 
     return rc;
 }
+
+bugT rotateModel(modelT &curModel, const rotationT &curRotation) {
+
+    bugT rc = OK;
+
+    if (curModel.edges.amount == 0)
+        rc = NO_MODEL;
+    else {
+        rotatePoints(curModel.points, curRotation);
+    }
+
+    return rc;
+}

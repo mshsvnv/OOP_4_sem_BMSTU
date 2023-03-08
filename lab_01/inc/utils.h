@@ -11,13 +11,13 @@ struct point {
 
 using pointT = struct point;
 
-struct move {
+struct movement {
     double dx;
     double dy;
     double dz;
 };
 
-struct rotate {
+struct rotation {
     pointT keyPoint;
 
     double oX;
@@ -33,10 +33,12 @@ struct scale {
     double kz;
 };
 
-using movementT = struct move;
-using rotationT = struct rotate;
+using movementT = struct movement;
+using rotationT = struct rotation;
 using scaleT = struct scale;
 
 void checkScale(scaleT &curScale);
+
+double getRadians(const double &angle);
 
 #endif // __UTILS_H__
