@@ -11,6 +11,7 @@
 #include "scene.h"
 #include "bug.h"
 #include "model.h"
+#include "info.h"
 
 // ${workspaceFolder}/**
 // /usr/include/x86_64-linux-gnu/qt5/
@@ -27,39 +28,35 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->graphicsView->setAlignment(Qt::AlignTop | Qt::AlignLeft);
     scene->setSceneRect(0, 0, 1, 1);
 
-    connect(ui->progInfo, &QAction::triggered, this, &MainWindow::showProgInfo);
-    connect(ui->authorInfo, &QAction::triggered, this, &MainWindow::showAuthorInfo);
-    connect(ui->inputInfo, &QAction::triggered, this, &MainWindow::showInputInfo);
+    connect(ui->progInfo, &QAction::triggered, this, showProgInfo);
+    connect(ui->authorInfo, &QAction::triggered, this, showAuthorInfo);
+    connect(ui->inputInfo, &QAction::triggered, this, showInputInfo);
+    connect(ui->toolButton, &QPushButton::clicked, this, showKeyInfo);
     
-    connect(ui->saveAction, &QAction::triggered, this, &MainWindow::saveCommand);
     connect(ui->loadAction, &QAction::triggered, this, &MainWindow::loadCommand);
+    connect(ui->exitAction, &QAction::triggered, this, &MainWindow::exitCommand);
 
-    connect(ui->saveButton, &QPushButton::clicked, this, &MainWindow::saveCommand);
     connect(ui->loadButton, &QPushButton::clicked, this, &MainWindow::loadCommand);
-
     connect(ui->moveButton, &QPushButton::clicked, this, &MainWindow::moveCommand);
     connect(ui->rotateButton, &QPushButton::clicked, this, &MainWindow::rotateCommand);
     connect(ui->scaleButton, &QPushButton::clicked, this, &MainWindow::scaleCommand);
-}
+}   
+
 
 MainWindow::~MainWindow(void) {
     delete ui;
 }
 
-void MainWindow::showProgInfo(void) {
-    QMessageBox::about(this, "О программе", "3D viewer для поворота, масштабирования и перемещения каркасных моделей");
-}
+void MainWindow::exitCommand(void) {
 
-void MainWindow::showAuthorInfo(void) {
-    QMessageBox::about(this, "Об авторе", "Савинова Мария ИУ7-41Б");
-}
+    bugT rc = OK;
+    procT curProc;
 
-void MainWindow::showInputInfo(void) {
-    QMessageBox::about(this, "О входных данных", "1. Кол-во точек\n2. Координаты x, y, z\n 3. Кол-во ребер\n 4. Связи между точками");
-}
+    curProc.action = DELETE;
 
-void MainWindow::saveCommand(void) {
-    return;
+    rc = performProc(curProc);
+
+    exit(rc);
 }
 
 void MainWindow::loadCommand(void) {

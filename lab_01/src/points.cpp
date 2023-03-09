@@ -10,7 +10,7 @@ void initPoints(pointsT &curPoints) {
 
 void deletePoints(pointsT &curPoints) {
 
-    if (curPoints.list != nullptr)
+    if (curPoints.list != nullptr) 
         delete [] curPoints.list;
 
     initPoints(curPoints);
@@ -65,7 +65,7 @@ bugT allocatePoints(pointsT &curPoints) {
 bugT readAllPoints(pointsT &curPoints, FILE *file) {
 
     bugT rc = OK;
-
+    
     for (int i = 0; i < curPoints.amount; i++) {
 
         rc = readPoint(curPoints.list[i], file);
@@ -79,21 +79,18 @@ bugT readAllPoints(pointsT &curPoints, FILE *file) {
 
 void movePoints(pointsT &curPoints, const movementT &curMovement) {
 
-    for (int i = 0; i < curPoints.amount; i++) {
+    for (int i = 0; i < curPoints.amount; i++)
         movePoint(curPoints.list[i], curMovement);
-    }
 }
 
 void scalePoints(pointsT &curPoints, const scaleT &curScale) {
 
-    for (int i = 0; i < curPoints.amount; i++) {
+    for (int i = 0; i < curPoints.amount; i++)
         scalePoint(curPoints.list[i], curScale);
-    }
 }
 
 void rotatePoints(pointsT &curPoints, const rotationT &curRotation) {
 
-    for (int i = 0; i < curPoints.amount; i++) {
+    for (int i = 0; i < curPoints.amount; i++)
         rotatePoint(curPoints.list[i], curRotation);
-    }
 }

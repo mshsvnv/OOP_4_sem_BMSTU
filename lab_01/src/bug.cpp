@@ -8,6 +8,9 @@ void showBugMessage(bugT &curBug) {
         case NO_MODEL:
             QMessageBox::warning(nullptr, "Предупреждение!", "Модель не была загружена!");
             break;
+        case EMPTY_FILE:
+            QMessageBox::warning(nullptr, "Предупреждение!", "Пустой файл!");
+            break;
         case MEMORY_ERR:
             QMessageBox::warning(nullptr, "Предупреждение!", "Ошибка при выделении памяти!");
             break;

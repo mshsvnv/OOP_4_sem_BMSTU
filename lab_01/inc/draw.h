@@ -8,6 +8,6 @@
 
 void drawLines(const edgesT &curEdges, const pointsT &curPoints, sceneT &curScene);
 
-void drawLine(point2DT &firstPoint, point2DT &secondPoint, sceneT &curScene);
+void drawLine(const point2DT &firstPoint, const point2DT &secondPoint, sceneT &curScene);
 
 #endif // __DRAW_H__

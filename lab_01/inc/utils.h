@@ -1,6 +1,8 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
+#include <iostream>
+
 #define ZERO_SCALE 1E-8
 
 struct point {
@@ -40,5 +42,7 @@ using scaleT = struct scale;
 void checkScale(scaleT &curScale);
 
 double getRadians(const double &angle);
+
+long fileSize(FILE *file);
 
 #endif // __UTILS_H__

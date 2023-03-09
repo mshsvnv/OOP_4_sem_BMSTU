@@ -54,6 +54,7 @@ OBJECTS_DIR   = out/
 
 SOURCES       = src/scene.cpp \
 		src/bug.cpp \
+		src/info.cpp \
 		src/draw.cpp \
 		src/model.cpp \
 		src/edges.cpp \
@@ -67,6 +68,7 @@ SOURCES       = src/scene.cpp \
 		src/edge.cpp moc/moc_mainwindow.cpp
 OBJECTS       = out/scene.o \
 		out/bug.o \
+		out/info.o \
 		out/draw.o \
 		out/model.o \
 		out/edges.o \
@@ -142,6 +144,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -173,8 +176,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		inc/edge.h \
 		inc/ui_main.h \
 		inc/edges.h \
+		inc/info.h \
 		inc/mainwindow.h src/scene.cpp \
 		src/bug.cpp \
+		src/info.cpp \
 		src/draw.cpp \
 		src/model.cpp \
 		src/edges.cpp \
@@ -260,6 +265,7 @@ Makefile: lab_01.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf 
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -344,6 +350,7 @@ Makefile: lab_01.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf 
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -379,8 +386,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents inc/proc.h inc/points.h inc/node.h inc/model.h inc/bug.h inc/point.h inc/scene.h inc/draw.h inc/utils.h inc/edge.h inc/ui_main.h inc/edges.h inc/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/scene.cpp src/bug.cpp src/draw.cpp src/model.cpp src/edges.cpp src/proc.cpp src/point.cpp src/mainwindow.cpp src/utils.cpp src/points.cpp src/main.cpp src/node.cpp src/edge.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents inc/proc.h inc/points.h inc/node.h inc/model.h inc/bug.h inc/point.h inc/scene.h inc/draw.h inc/utils.h inc/edge.h inc/ui_main.h inc/edges.h inc/info.h inc/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/scene.cpp src/bug.cpp src/info.cpp src/draw.cpp src/model.cpp src/edges.cpp src/proc.cpp src/point.cpp src/mainwindow.cpp src/utils.cpp src/points.cpp src/main.cpp src/node.cpp src/edge.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents main.ui $(DISTDIR)/
 
 
@@ -452,6 +459,9 @@ out/scene.o: src/scene.cpp inc/scene.h
 out/bug.o: src/bug.cpp inc/bug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o out/bug.o src/bug.cpp
 
+out/info.o: src/info.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o out/info.o src/info.cpp
+
 out/draw.o: src/draw.cpp inc/draw.h \
 		inc/point.h \
 		inc/bug.h \
@@ -503,7 +513,8 @@ out/mainwindow.o: src/mainwindow.cpp inc/mainwindow.h \
 		inc/model.h \
 		inc/points.h \
 		inc/edges.h \
-		inc/edge.h
+		inc/edge.h \
+		inc/info.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o out/mainwindow.o src/mainwindow.cpp
 
 out/utils.o: src/utils.cpp inc/utils.h

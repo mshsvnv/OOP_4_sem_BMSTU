@@ -13,8 +13,6 @@ bugT performProc(procT &curProc) {
         case LOAD:
             rc = loadModel(curModel, curProc.fileName);
             break;
-        // case SAVE:
-        //     break;
         case DRAW:
             drawModel(curModel, curProc.scene);
             break;
@@ -27,8 +25,9 @@ bugT performProc(procT &curProc) {
         case SCALE:
             rc = scaleModel(curModel, curProc.scale);
             break;
-        // case EXIT:
-        //     break;
+        case DELETE:
+            deleteModel(curModel);
+            break;
         default:
             rc = UNKNOWN_COMMAND;
     }

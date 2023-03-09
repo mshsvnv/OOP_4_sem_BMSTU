@@ -12,16 +12,9 @@ namespace Ui {
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
-    public: 
-        MainWindow(QWidget *parent = nullptr);
-        ~MainWindow();
-
     private:
-        void showProgInfo();
 
-        void showAuthorInfo();
-
-        void showInputInfo();
+        void exitCommand();
 
         void saveCommand();
 
@@ -35,8 +28,11 @@ class MainWindow : public QMainWindow {
 
         bugT drawModelCommand();
 
-    private:
         Ui::MainWindow *ui;
+
+    public: 
+        MainWindow(QWidget *parent = nullptr);
+        ~MainWindow();
 };
 
 #endif // __MAINWINDOW_H__

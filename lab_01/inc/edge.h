@@ -13,6 +13,8 @@ using edgeT = struct edge;
 
 bugT readEdge(edgeT &curEdge, FILE *file);
 
+void copyEdge(const edgeT &src, edgeT &dst);
+
 edgeT getEdgeByIndex(const edgeT *list, const int index);
 
 #endif // __EDGE_H__

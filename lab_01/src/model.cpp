@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "model.h"
 #include "draw.h"
+#include "utils.h"
 
 modelT &initModel(void) {
     
@@ -21,15 +22,16 @@ bugT loadModel(modelT &curModel, const char *fileName) {
 
     modelT tempModel;
 
+    initEdges(tempModel.edges);
+    initPoints(tempModel.points);
+
     FILE *file = fopen(fileName, "r");
-    
-    if (!file)
-        rc = NO_INPUT_FILE;
+
+    if (fileSize(file) == 0)
+        rc = EMPTY_FILE;
 
     if (rc == OK)
         rc = readModel(tempModel, file);
-
-    cout << rc << endl;
 
     if (rc == OK)
         copyModel(curModel, tempModel);

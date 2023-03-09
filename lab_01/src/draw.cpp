@@ -20,7 +20,7 @@ void drawLines(const edgesT &curEdges, const pointsT &curPoints, sceneT &curScen
     }
 }
 
-void drawLine(point2DT &firstPoint, point2DT &secondPoint, sceneT &curScene) {
+void drawLine(const point2DT &firstPoint, const point2DT &secondPoint, sceneT &curScene) {
     
     curScene.scene->addLine(firstPoint.x, firstPoint.y,
                             secondPoint.x, secondPoint.y, QPen(Qt::magenta));

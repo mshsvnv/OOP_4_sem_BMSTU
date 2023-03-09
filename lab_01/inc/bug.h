@@ -4,9 +4,9 @@
 enum bug {
     OK,
     NO_MODEL,
+    EMPTY_FILE,
     MEMORY_ERR,
     UNKNOWN_COMMAND,
-    NO_INPUT_FILE,
     POINTS_AMOUNT,
     EDGES_AMOUNT,
     POINT_ERR,

@@ -14,7 +14,7 @@ enum actT{
     ROTATE,
     MOVE,
     SCALE,
-    EXIT
+    DELETE
 };
 
 struct proc {

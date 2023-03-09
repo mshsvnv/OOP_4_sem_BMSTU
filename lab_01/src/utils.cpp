@@ -16,3 +16,12 @@ void checkScale(scaleT &curScale) {
 double getRadians(const double &angle) {
     return (angle * M_PI) / 180;
 }
+
+long fileSize(FILE *file) {
+    
+    fseek(file, 0, SEEK_END);
+    long size = ftell(file);
+    fseek(file, 0, SEEK_SET);
+
+    return size;
+}

@@ -27,10 +27,7 @@ void convertPoint(const pointT &point3D, point2DT &point2D) {
 }
 
 void copyPoint(const pointT &src, pointT &dst) {
-
-    dst.x = src.x;
-    dst.y = src.y;
-    dst.z = src.z;
+    dst = src;
 }
 
 pointT getPointByIndex(const pointT *list, const int index) {

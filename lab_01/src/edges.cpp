@@ -10,10 +10,8 @@ void initEdges(edgesT &curEdges) {
 
 void deleteEdges(edgesT &curEdges) {
 
-    if (curEdges.list != nullptr) {
-        std::cout << "here" << std::endl;
-        delete curEdges.list;
-    }
+    if (curEdges.list != nullptr)
+        delete [] curEdges.list;
 
     initEdges(curEdges);
 }
@@ -30,8 +28,9 @@ bugT readEdges(edgesT &curEdges, FILE *file) {
     if (rc == OK) 
         rc = readAllEdges(curEdges, file);
 
-    if (rc != OK)
+    if (rc != OK) {
         deleteEdges(curEdges);
+    }
 
     return rc;
 }
@@ -39,7 +38,6 @@ bugT readEdges(edgesT &curEdges, FILE *file) {
 bugT readAmountEdges(int &amount, FILE *file) {
 
     bugT rc = OK;
-
     int temp = 0;
 
     if (fscanf(file, "%d", &temp) != 1 || temp <= 0)
@@ -53,7 +51,6 @@ bugT readAmountEdges(int &amount, FILE *file) {
 bugT allocateEdges(edgesT &curEdges) {
 
     bugT rc = OK;
-
     edgeT *buffer = new edgeT[curEdges.amount];
 
     if (buffer == nullptr)
@@ -67,7 +64,7 @@ bugT allocateEdges(edgesT &curEdges) {
 bugT readAllEdges(edgesT &curEdges, FILE *file) {
 
     bugT rc = OK;
-
+    
     for (int i = 0; i < curEdges.amount; i++) {
 
         rc = readEdge(curEdges.list[i], file);
