@@ -3,6 +3,7 @@
 
 #include "utils.h"
 #include "bug.h"
+#include "point.h"
 
 struct points {
     int amount;

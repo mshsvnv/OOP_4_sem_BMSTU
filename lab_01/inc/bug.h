@@ -5,6 +5,8 @@ enum bug {
     OK,
     NO_MODEL,
     EMPTY_FILE,
+    INVALID_FILE,
+    FILE_NAME_LEN,
     MEMORY_ERR,
     UNKNOWN_COMMAND,
     POINTS_AMOUNT,

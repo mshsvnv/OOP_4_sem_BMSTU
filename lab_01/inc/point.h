@@ -5,6 +5,14 @@
 #include "bug.h"
 #include "utils.h"
 
+struct point {
+    double x;
+    double y;
+    double z;
+};
+
+using pointT = struct point;
+
 struct point2D {
     double x;
     double y;
@@ -26,10 +34,10 @@ void scalePoint(pointT &curPoint, const scaleT &curScale);
 
 void rotatePoint(pointT &curPoint, const rotationT &curRotation);
 
-void rotatePointX(pointT &curPoint, const pointT &keyPoint, const double &alpha);
+void rotatePointX(pointT &curPoint, const double &alpha);
 
-void rotatePointY(pointT &curPoint, const pointT &keyPoint, const double &angle);
+void rotatePointY(pointT &curPoint, const double &angle);
 
-void rotatePointZ(pointT &curPoint, const pointT &keyPoint, const double &angle);
+void rotatePointZ(pointT &curPoint, const double &angle);
 
 #endif //__POINT__

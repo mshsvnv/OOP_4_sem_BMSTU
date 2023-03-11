@@ -4,8 +4,7 @@
 #include "bug.h"
 #include "scene.h"
 #include "utils.h"
-
-#define FILE_NAME_LEN 200
+#include "file.h"
 
 enum actT{
     LOAD,
@@ -22,7 +21,7 @@ struct proc {
     actT action;
 
     union {
-        char fileName[FILE_NAME_LEN];
+        char fileName[MAX_NAME_LEN];
 
         sceneT scene;
         scaleT scale;

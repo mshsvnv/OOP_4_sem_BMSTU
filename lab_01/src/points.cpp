@@ -79,18 +79,52 @@ bugT readAllPoints(pointsT &curPoints, FILE *file) {
 
 void movePoints(pointsT &curPoints, const movementT &curMovement) {
 
-    for (int i = 0; i < curPoints.amount; i++)
-        movePoint(curPoints.list[i], curMovement);
+    for (int i = 0; i < curPoints.amount; i++) {
+        
+        pointT curPoint;
+
+        curPoint = getPointByIndex(curPoints.list, i);
+
+        movePoint(curPoint, curMovement);
+    }
 }
 
 void scalePoints(pointsT &curPoints, const scaleT &curScale) {
 
-    for (int i = 0; i < curPoints.amount; i++)
-        scalePoint(curPoints.list[i], curScale);
+    movementT beforeMovement;
+    movementT afterMovement;
+
+    initBeforeMovement(beforeMovement, curScale.point);
+    initAfterMovement(afterMovement, curScale.point);
+
+    for (int i = 0; i < curPoints.amount; i++) {
+        
+        pointT curPoint;
+
+        curPoint = getPointByIndex(curPoints.list, i);
+
+        movePoint(curPoint, beforeMovement);
+        scalePoint(curPoint, curScale);
+        movePoint(curPoint, afterMovement);
+    }
 }
 
 void rotatePoints(pointsT &curPoints, const rotationT &curRotation) {
 
-    for (int i = 0; i < curPoints.amount; i++)
+    movementT beforeMovement;
+    movementT afterMovement;
+
+    initBeforeMovement(beforeMovement, curRotation.point);
+    initAfterMovement(afterMovement, curRotation.point);
+
+    for (int i = 0; i < curPoints.amount; i++) {
+        
+        pointT curPoint;
+
+        curPoint = getPointByIndex(curPoints.list, i);
+
+        movePoint(curPoint, beforeMovement);
         rotatePoint(curPoints.list[i], curRotation);
+        movePoint(curPoint, afterMovement);
+    }
 }

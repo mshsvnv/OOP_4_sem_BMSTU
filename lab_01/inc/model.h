@@ -25,7 +25,7 @@ void deleteModel(modelT &model);
 
 void copyModel(modelT &permModel, const modelT &tempModel);
 
-void drawModel(const modelT &curModel, sceneT &curScene);
+bugT drawModel(const modelT &curModel, sceneT &curScene);
 
 bugT moveModel(modelT &curModel, const movementT &curMovemnet);
 

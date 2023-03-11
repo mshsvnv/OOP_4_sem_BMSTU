@@ -298,8 +298,8 @@ public:
 
         yBox = new QDoubleSpinBox(groupBox_4);
         yBox->setObjectName(QString::fromUtf8("yBox"));
-        yBox->setMinimum(-100.000000000000000);
-        yBox->setMaximum(100.000000000000000);
+        yBox->setMinimum(-1000.000000000000000);
+        yBox->setMaximum(1000.000000000000000);
         yBox->setValue(0.000000000000000);
 
         gridLayout_5->addWidget(yBox, 1, 2, 1, 1);
@@ -311,8 +311,8 @@ public:
 
         zBox = new QDoubleSpinBox(groupBox_4);
         zBox->setObjectName(QString::fromUtf8("zBox"));
-        zBox->setMinimum(-100.000000000000000);
-        zBox->setMaximum(100.000000000000000);
+        zBox->setMinimum(-1000.000000000000000);
+        zBox->setMaximum(1000.000000000000000);
 
         gridLayout_5->addWidget(zBox, 1, 4, 1, 1);
 
@@ -323,8 +323,8 @@ public:
 
         xBox = new QDoubleSpinBox(groupBox_4);
         xBox->setObjectName(QString::fromUtf8("xBox"));
-        xBox->setMinimum(-100.000000000000000);
-        xBox->setMaximum(100.000000000000000);
+        xBox->setMinimum(-1000.000000000000000);
+        xBox->setMaximum(1000.000000000000000);
 
         gridLayout_5->addWidget(xBox, 1, 6, 1, 1);
 

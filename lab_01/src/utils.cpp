@@ -14,14 +14,20 @@ void checkScale(scaleT &curScale) {
 }
 
 double getRadians(const double &angle) {
+    
     return (angle * M_PI) / 180;
 }
 
-long fileSize(FILE *file) {
+void initBeforeMovement(movementT &curMovement, const keyPointT &point) {
     
-    fseek(file, 0, SEEK_END);
-    long size = ftell(file);
-    fseek(file, 0, SEEK_SET);
+    curMovement.dx = point.x;
+    curMovement.dy = point.y;
+    curMovement.dz = point.z;
+}
 
-    return size;
+void initAfterMovement(movementT &curMovement, const keyPointT &point) {
+    
+    curMovement.dx = -point.x;
+    curMovement.dy = -point.y;
+    curMovement.dz = -point.z;
 }

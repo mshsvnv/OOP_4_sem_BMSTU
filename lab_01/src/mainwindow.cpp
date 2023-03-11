@@ -12,6 +12,7 @@
 #include "bug.h"
 #include "model.h"
 #include "info.h"
+#include "file.h"
 
 // ${workspaceFolder}/**
 // /usr/include/x86_64-linux-gnu/qt5/
@@ -63,17 +64,22 @@ void MainWindow::loadCommand(void) {
 
     bugT rc = OK;
     procT curProc;
+    char curFileName[MAX_NAME_LEN];
     
     QString fileName = QFileDialog::getOpenFileName(this, "Выбрать файл", "./data"); 
+    strcpy(curFileName, fileName.toStdString().c_str());
     
-    curProc.action = LOAD;
-    strcpy(curProc.fileName, fileName.toStdString().c_str());
-
-    rc = performProc(curProc);
+    rc = checkValidFile(curFileName);
 
     if (rc == OK) {
-        rc = drawModelCommand();
+        strcpy(curProc.fileName, curFileName);
+        curProc.action = LOAD;
+    
+        rc = performProc(curProc);
     }
+
+    if (rc == OK)
+        rc = drawModelCommand();
     else
         showBugMessage(rc);
 
@@ -118,10 +124,7 @@ void MainWindow::scaleCommand(void) {
 
     curProc.action = SCALE;
 
-    curProc.scale.kx = kx;
-    curProc.scale.ky = ky;
-    curProc.scale.kz = kz;
-    curProc.scale.keyPoint = {x, y, z};
+    curProc.scale = {{kx, ky, kz}, x, y, z};
 
     checkScale(curProc.scale);
 
@@ -150,10 +153,7 @@ void MainWindow::rotateCommand(void) {
 
     curProc.action = ROTATE;
 
-    curProc.rotation.oX = oX;
-    curProc.rotation.oY = oY;
-    curProc.rotation.oZ = oZ;
-    curProc.rotation.keyPoint = {x, y, z};
+    curProc.rotation = {{x, y, z}, oX, oY, oZ};
 
     rc = performProc(curProc);
 

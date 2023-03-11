@@ -52,7 +52,8 @@ OBJECTS_DIR   = out/
 
 ####### Files
 
-SOURCES       = src/scene.cpp \
+SOURCES       = src/file.cpp \
+		src/scene.cpp \
 		src/bug.cpp \
 		src/info.cpp \
 		src/draw.cpp \
@@ -64,9 +65,9 @@ SOURCES       = src/scene.cpp \
 		src/utils.cpp \
 		src/points.cpp \
 		src/main.cpp \
-		src/node.cpp \
 		src/edge.cpp moc/moc_mainwindow.cpp
-OBJECTS       = out/scene.o \
+OBJECTS       = out/file.o \
+		out/scene.o \
 		out/bug.o \
 		out/info.o \
 		out/draw.o \
@@ -78,7 +79,6 @@ OBJECTS       = out/scene.o \
 		out/utils.o \
 		out/points.o \
 		out/main.o \
-		out/node.o \
 		out/edge.o \
 		out/moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -166,7 +166,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		lab_01.pro inc/proc.h \
 		inc/points.h \
-		inc/node.h \
 		inc/model.h \
 		inc/bug.h \
 		inc/point.h \
@@ -177,7 +176,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		inc/ui_main.h \
 		inc/edges.h \
 		inc/info.h \
-		inc/mainwindow.h src/scene.cpp \
+		inc/file.h \
+		inc/mainwindow.h src/file.cpp \
+		src/scene.cpp \
 		src/bug.cpp \
 		src/info.cpp \
 		src/draw.cpp \
@@ -189,7 +190,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		src/utils.cpp \
 		src/points.cpp \
 		src/main.cpp \
-		src/node.cpp \
 		src/edge.cpp
 QMAKE_TARGET  = app.exe
 DESTDIR       = 
@@ -386,8 +386,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents inc/proc.h inc/points.h inc/node.h inc/model.h inc/bug.h inc/point.h inc/scene.h inc/draw.h inc/utils.h inc/edge.h inc/ui_main.h inc/edges.h inc/info.h inc/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/scene.cpp src/bug.cpp src/info.cpp src/draw.cpp src/model.cpp src/edges.cpp src/proc.cpp src/point.cpp src/mainwindow.cpp src/utils.cpp src/points.cpp src/main.cpp src/node.cpp src/edge.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents inc/proc.h inc/points.h inc/model.h inc/bug.h inc/point.h inc/scene.h inc/draw.h inc/utils.h inc/edge.h inc/ui_main.h inc/edges.h inc/info.h inc/file.h inc/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/file.cpp src/scene.cpp src/bug.cpp src/info.cpp src/draw.cpp src/model.cpp src/edges.cpp src/proc.cpp src/point.cpp src/mainwindow.cpp src/utils.cpp src/points.cpp src/main.cpp src/edge.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents main.ui $(DISTDIR)/
 
 
@@ -428,6 +428,7 @@ moc/moc_mainwindow.cpp: inc/mainwindow.h \
 		inc/bug.h \
 		inc/scene.h \
 		inc/utils.h \
+		inc/file.h \
 		moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include '/home/mshsvnv/Рабочий стол/studying/OOP_4_sem_BMSTU/lab_01/moc/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/home/mshsvnv/Рабочий стол/studying/OOP_4_sem_BMSTU/lab_01' -I'/home/mshsvnv/Рабочий стол/studying/OOP_4_sem_BMSTU/lab_01' -I'/home/mshsvnv/Рабочий стол/studying/OOP_4_sem_BMSTU/lab_01/inc' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include inc/mainwindow.h -o moc/moc_mainwindow.cpp
@@ -453,6 +454,10 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
+out/file.o: src/file.cpp inc/file.h \
+		inc/bug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o out/file.o src/file.cpp
+
 out/scene.o: src/scene.cpp inc/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o out/scene.o src/scene.cpp
 
@@ -477,10 +482,10 @@ out/model.o: src/model.cpp inc/scene.h \
 		inc/points.h \
 		inc/utils.h \
 		inc/bug.h \
+		inc/point.h \
 		inc/edges.h \
 		inc/edge.h \
-		inc/draw.h \
-		inc/point.h
+		inc/draw.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o out/model.o src/model.cpp
 
 out/edges.o: src/edges.cpp inc/edges.h \
@@ -492,8 +497,10 @@ out/proc.o: src/proc.cpp inc/proc.h \
 		inc/bug.h \
 		inc/scene.h \
 		inc/utils.h \
+		inc/file.h \
 		inc/model.h \
 		inc/points.h \
+		inc/point.h \
 		inc/edges.h \
 		inc/edge.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o out/proc.o src/proc.cpp
@@ -509,9 +516,11 @@ out/mainwindow.o: src/mainwindow.cpp inc/mainwindow.h \
 		inc/bug.h \
 		inc/scene.h \
 		inc/utils.h \
+		inc/file.h \
 		inc/ui_main.h \
 		inc/model.h \
 		inc/points.h \
+		inc/point.h \
 		inc/edges.h \
 		inc/edge.h \
 		inc/info.h
@@ -530,11 +539,9 @@ out/main.o: src/main.cpp inc/mainwindow.h \
 		inc/proc.h \
 		inc/bug.h \
 		inc/scene.h \
-		inc/utils.h
+		inc/utils.h \
+		inc/file.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o out/main.o src/main.cpp
-
-out/node.o: src/node.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o out/node.o src/node.cpp
 
 out/edge.o: src/edge.cpp inc/edge.h \
 		inc/bug.h

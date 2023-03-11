@@ -1,7 +1,7 @@
 #include <iostream>
 #include "proc.h"
-
 #include "model.h"
+#include "file.h"
 
 bugT performProc(procT &curProc) {
     
@@ -14,7 +14,7 @@ bugT performProc(procT &curProc) {
             rc = loadModel(curModel, curProc.fileName);
             break;
         case DRAW:
-            drawModel(curModel, curProc.scene);
+            rc = drawModel(curModel, curProc.scene);
             break;
         case ROTATE:
             rc = rotateModel(curModel, curProc.rotation);

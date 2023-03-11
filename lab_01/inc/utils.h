@@ -5,13 +5,13 @@
 
 #define ZERO_SCALE 1E-8
 
-struct point {
+struct keyPoint {
     double x;
     double y;
     double z;
 };
 
-using pointT = struct point;
+using keyPointT = struct keyPoint;
 
 struct movement {
     double dx;
@@ -20,7 +20,7 @@ struct movement {
 };
 
 struct rotation {
-    pointT keyPoint;
+    keyPointT point;
 
     double oX;
     double oY;
@@ -28,7 +28,7 @@ struct rotation {
 };
 
 struct scale {
-    pointT keyPoint;
+    keyPointT point;
 
     double kx;
     double ky;
@@ -43,6 +43,8 @@ void checkScale(scaleT &curScale);
 
 double getRadians(const double &angle);
 
-long fileSize(FILE *file);
+void initBeforeMovement(movementT &curMovement, const keyPointT &point);
+
+void initAfterMovement(movementT &curMovement, const keyPointT &point);
 
 #endif // __UTILS_H__

@@ -1,7 +1,6 @@
 #include "point.h"
 #include "scene.h"
 #include "math.h"
-#include "utils.h"
 
 bugT readPoint(pointT &curPoint, FILE *file) {
     
@@ -43,19 +42,19 @@ void movePoint(pointT &curPoint, const movementT &curMovement) {
 
 void scalePoint(pointT &curPoint, const scaleT &curScale) {
 
-    curPoint.x = curScale.keyPoint.x + (curPoint.x - curScale.keyPoint.x) * curScale.kx;
-    curPoint.y = curScale.keyPoint.y + (curPoint.y - curScale.keyPoint.y) * curScale.ky;
-    curPoint.z = curScale.keyPoint.z + (curPoint.z - curScale.keyPoint.z) * curScale.kz;
+    curPoint.x = curPoint.x * curScale.kx;
+    curPoint.y = curPoint.y * curScale.ky;
+    curPoint.z = curPoint.z * curScale.kz;
 }
 
 void rotatePoint(pointT &curPoint, const rotationT &curRotation) {
 
-    rotatePointX(curPoint, curRotation.keyPoint, curRotation.oX);
-    rotatePointY(curPoint, curRotation.keyPoint, curRotation.oY);
-    rotatePointZ(curPoint, curRotation.keyPoint, curRotation.oZ);
+    rotatePointX(curPoint, curRotation.oX);
+    rotatePointY(curPoint, curRotation.oY);
+    rotatePointZ(curPoint, curRotation.oZ);
 }
 
-void rotatePointX(pointT &curPoint, const pointT &keyPoint, const double &angle) {
+void rotatePointX(pointT &curPoint, const double &angle) {
 
     pointT oldPoint;
     double alpha = getRadians(angle);
@@ -65,11 +64,11 @@ void rotatePointX(pointT &curPoint, const pointT &keyPoint, const double &angle)
     double sinT = sin(alpha);
     double cosT = cos(alpha);
 
-    curPoint.y = keyPoint.y + (oldPoint.y - keyPoint.y) * cosT + (keyPoint.z - oldPoint.z) * sinT;
-    curPoint.z = keyPoint.z + (oldPoint.y - keyPoint.y) * sinT + (oldPoint.z - keyPoint.z) * cosT;
+    curPoint.y = oldPoint.y * cosT + oldPoint.z * sinT;
+    curPoint.z = -oldPoint.y * sinT + oldPoint.z * cosT;
 }
 
-void rotatePointY(pointT &curPoint, const pointT &keyPoint, const double &angle) {
+void rotatePointY(pointT &curPoint, const double &angle) {
 
     pointT oldPoint;
     double alpha = getRadians(angle);
@@ -79,11 +78,11 @@ void rotatePointY(pointT &curPoint, const pointT &keyPoint, const double &angle)
     double sinT = sin(alpha);
     double cosT = cos(alpha);
 
-    curPoint.x = keyPoint.x + (oldPoint.x - keyPoint.x) * cosT + (oldPoint.z - keyPoint.z) * sinT;
-    curPoint.z = keyPoint.z + (keyPoint.x - oldPoint.x) * sinT + (oldPoint.z - keyPoint.z) * cosT;
+    curPoint.x = oldPoint.x * cosT + oldPoint.z * sinT;
+    curPoint.z = -oldPoint.x * sinT + oldPoint.z * cosT;
 }
 
-void rotatePointZ(pointT &curPoint, const pointT &keyPoint, const double &angle) {
+void rotatePointZ(pointT &curPoint, const double &angle) {
 
     pointT oldPoint;
     double alpha = getRadians(angle);
@@ -93,6 +92,6 @@ void rotatePointZ(pointT &curPoint, const pointT &keyPoint, const double &angle)
     double sinT = sin(alpha);
     double cosT = cos(alpha);
 
-    curPoint.x = keyPoint.x + (oldPoint.x - keyPoint.x) * cosT + (keyPoint.y - oldPoint.y) * sinT;
-    curPoint.y = keyPoint.y + (oldPoint.x - keyPoint.x) * sinT + (oldPoint.y - keyPoint.y) * cosT;
+    curPoint.x = oldPoint.x * cosT + oldPoint.y * sinT;
+    curPoint.y = -oldPoint.x * sinT + oldPoint.y * cosT;
 }

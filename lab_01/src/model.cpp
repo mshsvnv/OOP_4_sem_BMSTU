@@ -27,14 +27,13 @@ bugT loadModel(modelT &curModel, const char *fileName) {
 
     FILE *file = fopen(fileName, "r");
 
-    if (fileSize(file) == 0)
-        rc = EMPTY_FILE;
-
     if (rc == OK)
         rc = readModel(tempModel, file);
 
-    if (rc == OK)
+    if (rc == OK) {
+        deleteModel(curModel);
         copyModel(curModel, tempModel);
+    }
     else
         deleteModel(tempModel);
 
@@ -65,14 +64,17 @@ void deleteModel(modelT &curModel) {
 }
 
 void copyModel(modelT &permModel, const modelT &tempModel) {
+
     permModel = tempModel;
 }
 
-void drawModel(const modelT &curModel, sceneT &curScene) {
+bugT drawModel(const modelT &curModel, sceneT &curScene) {
+
+    bugT rc = OK;
 
     drawLines(curModel.edges, curModel.points, curScene);
-    
-    return;
+
+    return rc;
 }
 
 bugT moveModel(modelT &curModel, const movementT &curMovement) {
@@ -81,9 +83,8 @@ bugT moveModel(modelT &curModel, const movementT &curMovement) {
 
     if (curModel.edges.amount == 0)
         rc = NO_MODEL;
-    else {
+    else
         movePoints(curModel.points, curMovement);
-    }
 
     return rc;
 }
@@ -94,9 +95,8 @@ bugT scaleModel(modelT &curModel, const scaleT &curScale) {
 
     if (curModel.edges.amount == 0)
         rc = NO_MODEL;
-    else {
+    else 
         scalePoints(curModel.points, curScale);
-    }
 
     return rc;
 }
@@ -107,9 +107,8 @@ bugT rotateModel(modelT &curModel, const rotationT &curRotation) {
 
     if (curModel.edges.amount == 0)
         rc = NO_MODEL;
-    else {
+    else
         rotatePoints(curModel.points, curRotation);
-    }
 
     return rc;
 }
