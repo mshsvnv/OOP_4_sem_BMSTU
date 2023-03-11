@@ -8,6 +8,12 @@ void showBugMessage(bugT &curBug) {
         case NO_MODEL:
             QMessageBox::warning(nullptr, "Предупреждение!", "Модель не была загружена!");
             break;
+        case FILE_NAME_LEN:
+            QMessageBox::warning(nullptr, "Предупреждение!", "Имя файла превышает допустимую длину!");
+            break;
+        case INVALID_FILE:
+            QMessageBox::warning(nullptr, "Предупреждение!", "Некорректный файл!");
+            break;
         case EMPTY_FILE:
             QMessageBox::warning(nullptr, "Предупреждение!", "Пустой файл!");
             break;
